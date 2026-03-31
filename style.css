@@ -70,29 +70,40 @@ section {
 }
 
 label {
+    padding: 15px 0;
     font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #424c3b;
 }
 
-input {
+.form label:first-child {
+    padding-top: 0;
+}
+
+.form label:first-child input {
+    width: auto;
+}
+
+.form label:last-child {
+    border-bottom: 0;
+}
+
+.form label > input {
     display: block;
     width: 100%;
     outline: none;
     border-radius: 5px;
     border: none;
-    margin-top: 5px;
     padding: 3px 5px;
     font-size: 16px;
+    width: 100px;
 }
 
 .form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px 35px;
-}
-
-.region {
-    grid-column: 1 / -1;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .region input {
@@ -101,8 +112,10 @@ input {
     width: auto;
 }
 
-button {
-    padding: 10px 25px;
+button, input[type="file"]::file-selector-button {
+    padding: 10px 0;
+    text-align: center;
+    width: 230px;
     font-size: 16px;
     font-weight: 500;
     border-radius: 10px;
@@ -111,10 +124,27 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:hover, input[type="file"]::file-selector-button:hover {
     background-color: #8e9b83;
     color: #fff;
     transition: all 0.1s linear;
+}
+
+input[type="file"] {
+    width: 400px;
+}
+
+input[type="file"]::file-selector-button {
+    margin-right: 15px;
+    font-family: "Montserrat";
+    color: #424c3b;
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    color: #fff;
 }
 
 /* Result */

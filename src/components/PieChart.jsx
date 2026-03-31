@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-export default class Chart extends Component {
+export default class PieChart extends Component {
 	render() {
 		const options = {
 			theme: "light",
@@ -17,12 +17,12 @@ export default class Chart extends Component {
                 toolTipContent: "{label}: <strong>{y}%</strong>",
 				dataPoints: [
 					{
-						y: 100-this.props.data,
+						y: 100-this.props.data.result,
 						label: "Недевиантное население",
 						color: "#578fd0",
 					},
 					{ 
-						y: this.props.data,
+						y: this.props.data.result,
 						label: "Девиантное население",
 						color: "#cf4b4b",
 					},

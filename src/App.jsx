@@ -1,25 +1,80 @@
-import Field from "./components/Field";
 import data from "./assets/data";
 import { useState } from "react";
-import Chart from "./components/Chart";
+import Results from "./components/Results";
+import Form from "./components/Form";
+import { delay } from "./helpers/delay";
+import example from "./assets/example one.json"
+// import example from "./assets/example lot.json"
+import Papa from "papaparse"
 
 export default function App() {
   const [showResult, setShowResult] = useState(false)
-  const [factors, setFactors] = useState({})
   const [result, setResult] = useState(null)
 
-  function handleClick(event) {
-    // fetch("вставить/адрес/сервера")
-    //   .then(res => res.json())
-    //   .then(data => setResult(data.result))
+  async function parseFile(file) {
+    return new Promise(resolve => Papa.parse(file, {
+      complete: (result, file) => {
+        let factors = [{}]
+        let rd = result.data
+        
+        for (let i = 0; i < rd[0].length; i++) {
+          const r = data.find(d => d.title === rd[0][i])?.name
 
-    setResult(19)
+          if (r === null) throw new Error("Неправильные названия столбцов")
+
+          rd[0][i] = r
+        }
+
+        let n = rd[0].length
+
+        for (let i = 1; i < rd.length; i++) {
+          if (i !== 1) factors.push({})
+
+          for (let j = 0; j < n; j++) {
+            if (j === 0) factors[i - 1][rd[0][j]] = rd[i][j]
+            else factors[i - 1][rd[0][j]] = parseFloat(rd[i][j])
+          }
+        }
+
+        resolve(factors)
+      }
+    }))
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+    const file = formData.get("file")
+
+    let factors = [{}]
+
+    if (file.name === "")
+      for (let [key, value] of formData) {
+        if (key === "file") continue
+
+        factors[0][key] = parseFloat(value)
+      }
+    else {
+      factors = await parseFile(file)
+    }
+
+    const json = JSON.stringify(factors)
+
+    await sendReq(json)
+
+    console.log(json)
+
     setShowResult(true)
   }
 
-  function handleChange(event) {
-    const {value, name} = event.currentTarget;
-    setFactors(prevFactors => ({...prevFactors, [name]: value}))
+  async function sendReq(jsonReq) {
+    await delay(500)
+
+    const jsonRes = example
+    const res = jsonRes  /* JSON.parse(jsonRes) */
+
+    setResult(res)
   }
   
   return (
@@ -33,45 +88,13 @@ export default function App() {
           <div className={"tab" + (showResult ? " active" : "")}>Результаты</div>
         </div>
 
-        {(!showResult) ? (
-          <section className="data-input">
-            <h1>Пожалуйста, введите данные вашего региона</h1>
+        {showResult && <Results result={result} />}
 
-            <div className="form">
-              <label className="region">Название региона:
-                <input
-                  type="text"
-                  name="region"
-                  id="region"
-                  onChange={handleChange}
-                />
-              </label>
-
-              {data.map((elem) => {
-                return <Field
-                  key={elem.name}
-                  {...elem}
-                  handleChange={handleChange}
-                />
-              })}
-            </div>
-
-            <button
-              type="sumbit"
-              onClick={handleClick}
-            >Показать результат</button>
-          </section>
-        ) : (
-          <section>
-            <h1>Результаты анализа</h1>
-            
-            <p>Доля девиантного населения среди подростков в вашем регионе составляет</p>
-
-            <h2>{result}%</h2>
-
-            <Chart className="chart" data={result} />
-          </section>
-        )}
+        <Form
+          style={{display: showResult ? "none" : "flex"}}
+          data={data}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </main>
   )

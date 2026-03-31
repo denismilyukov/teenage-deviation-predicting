@@ -1,5 +1,9 @@
 export default [
     {
+        title: "Название региона",
+        name: "region"
+    },
+    {
         title: "Доля граждан, ведущих здоровый образ жизни",
         name: "health_ratio"
     },
