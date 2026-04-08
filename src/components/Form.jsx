@@ -7,6 +7,14 @@ export default function Form({style, data, handleSubmit}) {
 
             <form className="form" onSubmit={handleSubmit}>
                 {data.map((elem) => {
+                    if (elem.name === "region") return (
+                        <Field
+                            key={elem.name}
+                            type="text"
+                            {...elem}
+                        />
+                    )
+
                     return (
                         <Field
                             key={elem.name}

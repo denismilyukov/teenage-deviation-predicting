@@ -2,9 +2,6 @@ import data from "./assets/data";
 import { useState } from "react";
 import Results from "./components/Results";
 import Form from "./components/Form";
-import { delay } from "./helpers/delay";
-import example from "./assets/example one.json"
-// import example from "./assets/example lot.json"
 import Papa from "papaparse"
 
 export default function App() {
@@ -53,7 +50,12 @@ export default function App() {
       for (let [key, value] of formData) {
         if (key === "file") continue
 
-        factors[0][key] = parseFloat(value)
+        if (key === "region") {
+          factors[0]["region"] = value
+          continue
+        }
+
+        factors[0][key] = parseInt(value)
       }
     else {
       factors = await parseFile(file)
@@ -63,18 +65,24 @@ export default function App() {
 
     await sendReq(json)
 
-    console.log(json)
-
     setShowResult(true)
   }
 
   async function sendReq(jsonReq) {
-    await delay(500)
-
-    const jsonRes = example
-    const res = jsonRes  /* JSON.parse(jsonRes) */
-
-    setResult(res)
+    try {
+      const res = await fetch("http://127.0.0.1:8000/deviant-forecast/many", {
+        method: "POST",
+        body: jsonReq,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const data = await res.json()
+  
+      setResult(data)
+    } catch(error) {
+      console.log(error)
+    }
   }
   
   return (

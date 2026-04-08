@@ -43,27 +43,7 @@ export default class ColumnChart extends Component {
 				reversed: true
 			},
 			data: [
-			// {
-			// 	type: "stackedColumn",
-			// 	name: "General",
-			// 	showInLegend: true,
-			// 	yValueFormatString: "#,###k",
-			// 	dataPoints: [
-			// 		{ label: "Jan", y: 14 },
-			// 		{ label: "Feb", y: 12 },
-			// 		{ label: "Mar", y: 14 },
-			// 		{ label: "Apr", y: 13 },
-			// 		{ label: "May", y: 13 },
-			// 		{ label: "Jun", y: 13 },
-			// 		{ label: "Jul", y: 14 },
-			// 		{ label: "Aug", y: 14 },
-			// 		{ label: "Sept", y: 13 },
-			// 		{ label: "Oct", y: 14 },
-			// 		{ label: "Nov", y: 14 },
-			// 		{ label: "Dec", y: 14 }
-			// 	]
-			// },
-            {
+			{
                 type: "stackedColumn",
 				color: "#8e9b83",
 				name: "Доля девиантного населения",
