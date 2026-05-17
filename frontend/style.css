@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg-color: #d4d4ce; 
+}
+
+* {
+    font-family: "Montserrat";
+    color: #424c3b;
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+    padding: 0 20px;
+}
+
+main {
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+h1, h2 {
+    margin: 0;
+    text-align: center;
+}
+
+section {
+    padding: 40px;
+    background-color: var(--bg-color);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Tabs */
+
+.tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.tab {
+    text-align: center;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 5px 0;
+    font-weight: 500;
+}
+
+.tab.active {
+    background-color: var(--bg-color);
+}
+
+.tab:not(.active) {
+    background-color: #8e9b83;
+    color: #fff;
+}
+
+.tab:first-child:not(.active) {
+    cursor: pointer;
+}
+
+/* Data Input */
+
+.data-input {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+label {
+    padding: 15px 0;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #424c3b;
+}
+
+.form label:first-child {
+    padding-top: 0;
+}
+
+.form label:first-child input {
+    width: auto;
+}
+
+.form label:last-child {
+    border-bottom: 0;
+}
+
+.form label > input {
+    display: block;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    padding: 3px 5px;
+    font-size: 16px;
+    width: 100px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.region input {
+    display: inline;
+    margin-left: 10px;
+    width: auto;
+}
+
+button, input[type="file"]::file-selector-button {
+    padding: 10px 0;
+    text-align: center;
+    width: 230px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+button:hover, input[type="file"]::file-selector-button:hover {
+    background-color: #8e9b83;
+    color: #fff;
+    transition: all 0.1s linear;
+}
+
+input[type="file"] {
+    width: 400px;
+}
+
+input[type="file"]::file-selector-button {
+    margin-right: 15px;
+    font-family: "Montserrat";
+    color: #424c3b;
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    color: #fff;
+}
+
+/* Result */
+
+p {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.chart {
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 100px;
+}
