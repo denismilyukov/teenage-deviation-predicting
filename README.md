@@ -11,8 +11,8 @@
 
 1. **Клонируйте репозиторий**
 ```bash
-   git clone https://yourrepositoryurl/plain-fastapi-react-docker.git
-   cd plain-fastapi-react-docker
+   git clone https://github.com/denismilyukov/teenage-deviation-predicting
+   cd teenage-deviation-predicting
 ```
 2. **Соберите и запустите контейнеры**
 
