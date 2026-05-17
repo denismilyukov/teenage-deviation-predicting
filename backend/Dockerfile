@@ -1,15 +1,12 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.14-slim
 
-# Set the working directory in the container
 WORKDIR /code
 
-# Copy the current directory contents into the container at /code
-COPY ./app /code/app
-COPY requirements.txt /code/
+# Копируем всё из текущей папки (где лежит Dockerfile) в /code
+COPY . /code/
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-# Run app.py when the container launches
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+# Запускаем приложение (файл main.py в корне)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]

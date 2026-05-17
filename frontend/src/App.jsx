@@ -70,7 +70,7 @@ export default function App() {
 
   async function sendReq(jsonReq) {
     try {
-      const res = await fetch("http://127.0.0.1:8000/deviant-forecast/many", {
+      const res = await fetch("http://localhost/deviant-forecast", {
         method: "POST",
         body: jsonReq,
         headers: {

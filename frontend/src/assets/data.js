@@ -13,7 +13,7 @@ export default [
     },
     {
         title: "Коэффициент Джини",
-        name: "coeff_gini"
+        name: "coeff_Gini"
     },
     {
         title: "Процент некурящих мужчин",
