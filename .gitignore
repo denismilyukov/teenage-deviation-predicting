@@ -160,3 +160,8 @@ cython_debug/
 #.idea/
 
 intsruction-git.txt
+
+.idea/
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+preprocessing.py
